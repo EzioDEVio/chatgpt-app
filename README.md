@@ -1,7 +1,5 @@
 
-Certainly! Below is a template for a `README.md` file that outlines how to use your app and integrate the OpenAI API. You can adjust the content as necessary to better fit your application's specifics.
 
-```markdown
 # ChatGPT API Integration Guide
 
 This repository provides a step-by-step guide on how to integrate OpenAI's ChatGPT API with web applications. It includes a simple web app example using Node.js and Express on the server side and basic HTML, CSS, and JavaScript on the client side.
@@ -109,9 +107,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - your@email.com
+Email: mohammed.k.aldaraji@hotmail.com
 
-Project Link: [https://github.com/your-github-username/your-repo-name](https://github.com/your-github-username/your-repo-name)
+Project Link: [https://github.com/EzioDEVio/chatgpt-app](https://github.com/EzioDEVio/chatgpt-app)
 ```
 
-Be sure to replace placeholders like `your-github-username`, `your-repo-name`, `your_api_key_here`, and `your@email.com` with your actual information. Once your README is ready, you can commit it to your repository along with the rest of your project files.
