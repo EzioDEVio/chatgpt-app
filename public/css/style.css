@@ -1,0 +1,33 @@
+body {
+    background: #f4f4f9;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto; /* Centers the container */
+}
+
+/* Flex container to align the answer div and copy button */
+.response-container {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    gap: 10px; /* Spacing between elements */
+    margin-top: 20px; /* Spacing from the top */
+}
+
+#answerDiv {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    min-height: 150px; /* Minimum height */
+    overflow-y: auto; /* Allows scrolling */
+    resize: vertical; /* Allows the user to resize vertically */
+}
+
+#copyButton {
+    align-self: flex-end; /* Aligns the button to the right */
+    padding: 0.375rem 0.75rem; /* Standard button padding */
+    font-size: 1rem; /* Standard font size for buttons */
+}
