@@ -1,4 +1,5 @@
-name: Build, Push and Scan Docker Image with Trivy
+
+name: Build, Push and Scan Docker Image
 
 on:
   push:
@@ -38,13 +39,16 @@ jobs:
           tags: ghcr.io/eziodevio/chatgpt-app:latest
           push: true
 
+      - name: Verify Image Push
+        run: docker pull ghcr.io/eziodevio/chatgpt-app:latest
+
       - name: Run Trivy vulnerability scanner on the Docker image
         uses: aquasecurity/trivy-action@0.0.8
         with:
           image-ref: 'ghcr.io/eziodevio/chatgpt-app:latest'
           format: 'table'
-          output: 'trivy-results.txt'  # Save the output to a file
-          exit-code: '0'  # Do not fail the job, regardless of findings
+          output: 'trivy-results.txt'
+          exit-code: '0'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results
