@@ -36,14 +36,14 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ghcr.io/${{ github.repository_owner }}/chatgpt-app:latest
+        tags: ghcr.io/${{ github.repository_owner | lower }}/chatgpt-app:latest
 
     - name: Run Trivy vulnerability scanner on the Docker image
       uses: aquasecurity/trivy-action@0.0.8
       with:
-        image-ref: 'ghcr.io/${{ github.repository_owner }}/chatgpt-app:latest'
+        image-ref: 'ghcr.io/${{ github.repository_owner | lower }}/chatgpt-app:latest'
         format: 'table'
-        exit-code: '0' # Fails the step if vulnerabilities are found, use '0' to not fail
+        exit-code: '0' # Set to '0' to not fail the build even if vulnerabilities are found
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
-
