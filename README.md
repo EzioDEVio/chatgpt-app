@@ -1,4 +1,4 @@
-
+[![Build, Push and Scan Docker Image](https://github.com/EzioDEVio/chatgpt-app/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/EzioDEVio/chatgpt-app/actions/workflows/docker-publish.yml)
 
 # ChatGPT API Integration Guide
 
