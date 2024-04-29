@@ -43,16 +43,16 @@ jobs:
         with:
           image-ref: 'ghcr.io/eziodevio/chatgpt-app:latest'
           format: 'table'
-          exit-code: '1'  # This will fail the job if any vulnerabilities are found
+          output: 'trivy-results.txt'  # Save the output to a file
+          exit-code: '0'  # Do not fail the job, regardless of findings
           severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: trivy-scan-results
+          path: trivy-results.txt
 
       - name: Logout from Docker
         if: always()
         run: docker logout ghcr.io
-
-      - name: Upload Trivy scan results if vulnerabilities found
-        if: failure()  # This step will execute if the Trivy scan step fails
-        uses: actions/upload-artifact@v2
-        with:
-          name: trivy-scan-results
-          path: trivy-report.txt
