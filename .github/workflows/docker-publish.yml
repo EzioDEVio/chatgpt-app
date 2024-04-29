@@ -1,4 +1,4 @@
-name: Build, Push and Scan Docker image with Trivy
+name: Build, Push and Scan Docker Image with Trivy
 
 on:
   push:
@@ -24,14 +24,16 @@ jobs:
 
       - name: Lowercase repository owner
         id: prep
-        run: echo "OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: |
+          echo "OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}  # Ensure you have this secret set up in your repository
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ secrets.GH_USERNAME }}  # Your GitHub username as a secret
+          password: ${{ secrets.GHCR_TOKEN }}   # Your GHCR token as a secret
+          logout: true
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -45,7 +47,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}  # This should be the same username used for Docker login
+          username: ${{ secrets.GH_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Run Trivy vulnerability scanner on the Docker image
@@ -62,3 +64,7 @@ jobs:
         with:
           name: trivy-report
           path: trivy-results.txt
+
+      - name: Logout from Docker
+        if: always()
+        run: docker logout ghcr.io
