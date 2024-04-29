@@ -1,5 +1,5 @@
 
-name: Build, Push and Scan Docker Image
+name: Build, Push and Scan Docker Image with Trivy
 
 on:
   push:
