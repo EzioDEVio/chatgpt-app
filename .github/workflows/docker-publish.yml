@@ -1,5 +1,4 @@
-
-name: Build, Push and Scan Docker Image
+name: Build, Push and Scan Docker Image with Trivy
 
 on:
   push:
@@ -44,14 +43,15 @@ jobs:
         with:
           image-ref: 'ghcr.io/eziodevio/chatgpt-app:latest'
           format: 'table'
-          exit-code: '0'  # This will fail the job if any vulnerabilities are found
+          exit-code: '1'  # This will fail the job if any vulnerabilities are found
           severity: 'CRITICAL,HIGH'
 
       - name: Logout from Docker
         if: always()
         run: docker logout ghcr.io
+
       - name: Upload Trivy scan results if vulnerabilities found
-        if: failure()  # Only runs if the Trivy scan fails
+        if: failure()  # This step will execute if the Trivy scan step fails
         uses: actions/upload-artifact@v2
         with:
           name: trivy-scan-results
