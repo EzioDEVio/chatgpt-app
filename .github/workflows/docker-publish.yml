@@ -1,4 +1,4 @@
-name: Build, Push Docker image and Scan with trivy
+name: Build, Push and Scan Docker image with trivy
 
 on:
   push:
@@ -29,24 +29,29 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
 
-    - name: Convert repository owner to lowercase
-      id: prep
-      run: echo "REPO_OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ env.REPO_OWNER_LOWER }}/chatgpt-app:latest
+        tags: ghcr.io/${{ github.repository_owner | lower }}/chatgpt-app:latest
+
+    - name: Ensure image is available
+      run: docker pull ghcr.io/${{ github.repository_owner | lower }}/chatgpt-app:latest
 
     - name: Run Trivy vulnerability scanner on the Docker image
       uses: aquasecurity/trivy-action@0.0.8
       with:
-        image-ref: 'ghcr.io/${{ env.REPO_OWNER_LOWER }}/chatgpt-app:latest'
+        image-ref: 'ghcr.io/${{ github.repository_owner | lower }}/chatgpt-app:latest'
         format: 'table'
-        exit-code: '0' # Set to '0' to not fail the build even if vulnerabilities are found
-        ignore-unfixed: true
-        vuln-type: 'os,library'
+        exit-code: '0' # Fails the step if vulnerabilities are found
         severity: 'CRITICAL,HIGH'
+        output: 'trivy-report.txt'
+
+    - name: Upload Trivy scan results
+      if: failure() # Only upload if the previous step failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: trivy-report
+        path: trivy-report.txt
