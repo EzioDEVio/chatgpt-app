@@ -2,7 +2,7 @@
 
 # ChatGPT API Integration Guide
 
-This repository provides a step-by-step guide on how to integrate OpenAI's ChatGPT API with web applications. It includes a simple web app example using Node.js and Express on the server side and basic HTML, CSS, and JavaScript on the client side. I used my paid plan for purpose of testing and see how it works.
+This repository provides a step-by-step guide on how to integrate OpenAI's ChatGPT API with web applications. It includes a simple web app example using Node.js and Express on the server side and basic HTML, CSS, and JavaScript on the client side. I used my paid plan for purpose of testing.
 
 ## Table of Contents
 
