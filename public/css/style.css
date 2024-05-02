@@ -5,15 +5,15 @@ body {
 
 .container {
     max-width: 800px;
-    margin: auto; /* Centers the container */
+    margin: auto; 
 }
 
-/* Flex container to align the answer div and copy button */
+
 .response-container {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    gap: 10px; /* Spacing between elements */
-    margin-top: 20px; /* Spacing from the top */
+    flex-direction: column; 
+    gap: 10px; 
+    margin-top: 20px; 
 }
 
 #answerDiv {
@@ -21,13 +21,13 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
-    min-height: 150px; /* Minimum height */
-    overflow-y: auto; /* Allows scrolling */
-    resize: vertical; /* Allows the user to resize vertically */
+    min-height: 150px; 
+    overflow-y: auto; 
+    resize: vertical; 
 }
 
 #copyButton {
-    align-self: flex-end; /* Aligns the button to the right */
-    padding: 0.375rem 0.75rem; /* Standard button padding */
-    font-size: 1rem; /* Standard font size for buttons */
+    align-self: flex-end; 
+    padding: 0.375rem 0.75rem; 
+    font-size: 1rem; 
 }
